@@ -38,4 +38,23 @@ router.get("/", async (req, res) => {
     }
 });
 
+// for deletion
+router.delete("/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        
+        await pool.query(
+            "DELETE FROM expenses WHERE id = $1",
+            [id]
+        );
+
+        console.log(`Deleted expense with ID: ${id}`);
+        res.json("Expense deleted successfully");
+
+    } catch (err) {
+        console.error("Delete error:", err);
+        res.status(500).send("Server error");
+    }
+});
+
 module.exports = router;
