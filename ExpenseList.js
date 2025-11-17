@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-export default function ExpenseList({ refresh }) {
+// accepts requests
+export default function ExpenseList({ refresh, onEdit, onRefresh }) { 
   const [expenses, setExpenses] = useState([]);
 
-  // Function to fetch data from db
+
+  // For fetching
   const fetchExpenses = async () => {
     try {
       const res = await fetch("http://localhost:5000/expenses");
@@ -14,21 +16,18 @@ export default function ExpenseList({ refresh }) {
     }
   };
   
-  // Function to handle deleting
+  // Delete Function
   const handleDelete = async (id) => {
     try {
-      // 1. Send the DELETE request to the backend
       await fetch(`http://localhost:5000/expenses/${id}`, {
         method: "DELETE",
       });
-      // 2. Refresh the list (fetch the data again)
-      fetchExpenses(); 
+      if (onRefresh) onRefresh(); 
     } catch (error) {
       console.error("Failed to delete expense:", error);
     }
   };
 
-  // Loads expenses on render and refresh
   useEffect(() => {
     fetchExpenses();
   }, [refresh]);
@@ -39,15 +38,21 @@ export default function ExpenseList({ refresh }) {
       <ul>
         {expenses.map((exp) => (
           <li key={exp.id}>
-            ${exp.amount} – {exp.category} – {exp.description} – {exp.date}
+            ${exp.amount} – {exp.category} – {exp.description} – {exp.date.split('T')[0]}
+            
+            // edit button
+            <button 
+              onClick={() => onEdit(exp)} 
+              style={{ marginLeft: '10px', background: 'blue', color: 'white' }}>
+              Edit
+            </button>
             
             // delete button
             <button 
               onClick={() => handleDelete(exp.id)} 
-              style={{ marginLeft: '10px' }}>
+              style={{ marginLeft: '10px', background: 'red', color: 'white' }}>
               Delete
             </button>
-
           </li>
         ))}
       </ul>
