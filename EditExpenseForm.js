@@ -74,8 +74,8 @@ export default function EditExpenseForm({ expense, onSave, onCancel }) {
         required
       /><br/>
       
-      <button type="submit" style={{ background: 'green', color: 'white', marginRight: '10px' }}>Save Changes</button>
-      <button type="button" onClick={onCancel} style={{ background: 'red', color: 'white' }}>Cancel Edit</button>
+      <button type="submit" style={{ background: 'white', color: 'black', marginRight: '10px' }}>Save Changes</button>
+      <button type="button" onClick={onCancel} style={{ background: 'white', color: 'black' }}>Cancel Edit</button>
     </form>
   );
 }
