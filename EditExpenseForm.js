@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 
+// setting up form
 export default function EditExpenseForm({ expense, onSave, onCancel }) {
   const [amount, setAmount] = useState(expense.amount);
   const [category, setCategory] = useState(expense.category);
   const [description, setDescription] = useState(expense.description || "");
   const [date, setDate] = useState(expense.date.split('T')[0]);
 
+  // setting up use effect
   useEffect(() => {
     setAmount(expense.amount);
     setCategory(expense.category);
@@ -13,7 +15,7 @@ export default function EditExpenseForm({ expense, onSave, onCancel }) {
     setDate(expense.date.split('T')[0]);
   }, [expense]);
 
-
+  //handling submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -24,20 +26,17 @@ export default function EditExpenseForm({ expense, onSave, onCancel }) {
       date,
     };
 
-    try {
-      const response = await fetch(`http://localhost:5000/expenses/${expense.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedExpense),
-      });
+    // for fetching asynchronously
+    const response = await fetch(`http://localhost:5000/expenses/${expense.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedExpense),
+    });
 
-      if (response.ok) {
-        onSave();
-      } else {
-        console.error("Failed to update expense:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Fetch error during update:", error);
+    if (response.ok) {
+      onSave();
+    } else {
+      console.error("Failed to update expense:", response.statusText);
     }
   };
 
