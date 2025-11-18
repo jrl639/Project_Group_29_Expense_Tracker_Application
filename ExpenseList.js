@@ -34,14 +34,14 @@ export default function ExpenseList({ refresh, onEdit, onRefresh }) {
             // edit button
             <button 
               onClick={() => onEdit(exp)} 
-              style={{ marginLeft: '10px', background: 'blue', color: 'white' }}>
+              style={{ marginLeft: '10px', background: 'white', color: 'black' }}>
               Edit
             </button>
             
             // delete button
             <button 
               onClick={() => handleDelete(exp.id)} 
-              style={{ marginLeft: '10px', background: 'red', color: 'white' }}>
+              style={{ marginLeft: '10px', background: 'white', color: 'black' }}>
               Delete
             </button>
           </li>
@@ -50,4 +50,5 @@ export default function ExpenseList({ refresh, onEdit, onRefresh }) {
     </div>
   );
 }
+
 
