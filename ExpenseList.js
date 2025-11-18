@@ -6,7 +6,6 @@ export default function ExpenseList({ refresh, onEdit, onRefresh }) {
 
   // For fetching
   const fetchExpenses = async () => {
-    // The logic previously inside the try block
     const res = await fetch("http://localhost:5000/expenses");
     const data = await res.json();
     setExpenses(data);
@@ -51,3 +50,4 @@ export default function ExpenseList({ refresh, onEdit, onRefresh }) {
     </div>
   );
 }
+
