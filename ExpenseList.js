@@ -4,28 +4,20 @@ import React, { useEffect, useState } from 'react';
 export default function ExpenseList({ refresh, onEdit, onRefresh }) { 
   const [expenses, setExpenses] = useState([]);
 
-
   // For fetching
   const fetchExpenses = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/expenses");
-      const data = await res.json();
-      setExpenses(data);
-    } catch (error) {
-      console.error("Failed to fetch expenses:", error);
-    }
+    // The logic previously inside the try block
+    const res = await fetch("http://localhost:5000/expenses");
+    const data = await res.json();
+    setExpenses(data);
   };
   
   // Delete Function
   const handleDelete = async (id) => {
-    try {
-      await fetch(`http://localhost:5000/expenses/${id}`, {
-        method: "DELETE",
-      });
-      if (onRefresh) onRefresh(); 
-    } catch (error) {
-      console.error("Failed to delete expense:", error);
-    }
+    await fetch(`http://localhost:5000/expenses/${id}`, {
+      method: "DELETE",
+    });
+    if (onRefresh) onRefresh(); 
   };
 
   useEffect(() => {
