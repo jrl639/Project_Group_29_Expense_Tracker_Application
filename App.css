@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+.app-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+@media (max-width: 600px) {
+  .app-container {
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+  h1, h2 {
+    font-size: 1.25rem;
+  }
+  input, button {
+    font-size: 1rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+input, button {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
